@@ -1,0 +1,20 @@
+/* src/styles/globals.css */
+
+/* Reset de márgenes y rellenos para asegurar que no haya espacios no deseados */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;  /* Asegura que el cuerpo ocupe toda la altura */
+    width: 100%;   /* Asegura que ocupe toda la anchura */
+    font-family: 'Open Sauce Sans', sans-serif; /* Aplica la fuente Open Sauce Sans a toda la página */
+    background: linear-gradient(90deg, #ff5757, #8c52ff); /* Gradiente de fondo que se aplica en toda la página */
+  }
+  
+  #__next {
+    height: 100%; /* Asegura que el contenedor de Next.js ocupe toda la pantalla */
+  }
+  
+  * {
+    box-sizing: border-box; /* Asegura que el padding y margin no afecten el tamaño de los elementos */
+  }
+  
