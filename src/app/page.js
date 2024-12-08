@@ -1,102 +1,122 @@
 "use client";
+import { useState, useEffect } from "react";
 import Image from "next/image";
-import Link from "next/link";
+import { useRouter } from "next/navigation";  // Asegúrate de usar 'next/navigation' si estás trabajando en Next 13+ con appDir
 
 export default function Home() {
-	return (
-		<div style={styles.container}>
-			<div style={styles.header}>
-				<div style={styles.logoContainer}>
-					<Image src="/vercel.svg" alt="Logo" width={40} height={40} />
-					<h1 style={styles.companyName}>Nombre empresa</h1>
-				</div>
+  const [isTransitioning, setIsTransitioning] = useState(false); // Estado para la transición
+  const router = useRouter();
 
-				{/* Botones alineados a la derecha */}
-				<div style={styles.buttonContainer}>
-					<Link href="/registro">
-						<button style={styles.button}>Registrate!</button>
-					</Link>
-					<Link href="/login">
-						<button style={styles.button}>Ingresar</button>
-					</Link>
-				</div>
-			</div>
+  // Función para manejar la navegación
+  const handleNavigation = (url) => {
+    setIsTransitioning(true); // Comienza la transición de opacidad
+    setTimeout(() => {
+      router.push(url); // Realiza la navegación después de 1 segundo
+    }, 1001);  // El tiempo debe coincidir con la duración de la animación
+  };
 
-			<main style={styles.main}>
-				<div style={styles.line}></div>
-				{/* Contenedor de las dos columnas */}
-				<div style={styles.mainContent}>
-					{/* Columna de la imagen */}
-					<div style={styles.imageContainer}>
-						<Image src="/next.svg" alt="Imagen" width={500} height={500} />
-					</div>
+  // Efecto para restablecer la transición
+  useEffect(() => {
+    if (isTransitioning) {
+      setTimeout(() => {
+        setIsTransitioning(false); // Termina la transición después de la duración especificada
+      }, 1000); // El tiempo debe coincidir con la duración de la animación
+    }
+  }, [isTransitioning]);
 
-					{/* Columna de los textos */}
-					<div style={styles.textContainer}>
-            <div>
-						<p style={styles.text}>
-							Regístrate y deja que la IA haga el match por vos.
-						</p>
-            </div>
-						<div style={styles.heading}>
-							<p>Donde tu</p>
-							<p>talento</p>
-							<p>encuentra su</p>
-							<p>lugar,</p>
+  return (
+    <div className={`container ${isTransitioning ? "exiting" : ""}`} style={styles.container}>
+      <div style={styles.header}>
+        <div style={styles.logoContainer}>
+          <Image src="/vercel.svg" alt="Logo" width={40} height={40} />
+          <h1 style={styles.companyName}>Nombre empresa</h1>
+        </div>
+
+        <div style={styles.buttonContainer}>
+          <button
+            style={styles.button}
+            onClick={() => handleNavigation("/registro")}
+          >
+            Registrate!
+          </button>
+          <button
+            style={styles.button}
+            onClick={() => handleNavigation("/login")}
+          >
+            Ingresar
+          </button>
+        </div>
+      </div>
+
+      <main style={styles.main}>
+        <div style={styles.line}></div>
+        <div style={styles.mainContent}>
+          <div style={styles.imageContainer}>
+            <Image src="/next.svg" alt="Imagen" width={500} height={500} />
+          </div>
+          <div style={styles.textContainer}>
+            <p style={styles.text}>
+              Regístrate y deja que la IA haga el match por vos.
+            </p>
+            <div style={styles.heading}>
+              <p>Donde tu</p>
+              <p>talento</p>
+              <p>encuentra su</p>
+              <p>lugar,</p>
               <p>próximamente.</p>
-
-						</div>
-					</div>
-				</div>
-			</main>
-		</div>
-	);
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  );
 }
 
 const styles = {
   container: {
     display: "flex",
     flexDirection: "column",
-    justifyContent: "flex-start", // Asegura que el header esté arriba
+    justifyContent: "flex-start",
     alignItems: "center",
-    height: "100vh", // Ocupa toda la altura de la pantalla
-    background: "linear-gradient(90deg, #ff5757, #8c52ff)", // Gradiente de fondo
+    height: "100vh",
+    background: "linear-gradient(90deg, #ff5757, #8c52ff)",
     fontFamily: "Arial, sans-serif",
+    transition: "opacity 1s ease-in-out", // Transición de opacidad
   },
   header: {
     display: "flex",
-    justifyContent: "space-around", // Alinea el contenido del header a los extremos
-    alignItems: "center", // Alinea los elementos verticalmente en el centro
-    width: "100%", // Asegura que ocupe el 100% del ancho de la pantalla
-    height: "30px",
-    padding: "10px 20px", // Espaciado interno
-    margin: "5%",
+    justifyContent: "space-around",
+    alignItems: "center",
+    width: "100%",
+    padding: "10px 20px",
+    margin: "2%",
   },
   logoContainer: {
     display: "flex",
-    alignItems: "center", // Alinea logo e nombre verticalmente
+    alignItems: "center",
     paddingRight: "50px",
   },
   companyName: {
     fontSize: "50px",
     marginLeft: "10px",
     fontWeight: "bold",
-    color: "#fff", // Asegura que el nombre de la empresa se vea bien sobre el fondo
+    color: "#fff",
   },
   buttonContainer: {
     display: "flex",
-    gap: "100px", // Espacio entre los botones
+    gap: "100px",
     color: "#fff",
   },
   button: {
     padding: "10px 20px",
-    fontSize: "50px", // Ajusta el tamaño de la fuente
+    fontSize: "40px",
     cursor: "pointer",
-    border: "2px solid transparent", // Borde transparente
-    outline: "none", // Elimina el borde de enfoque
-    color: "#fff", // Texto blanco
-    backgroundColor: "transparent", // Fondo transparente
-    transition: "background-color 0.3s ease", // Transición suave para cambios
+    border: "2px solid transparent",
+    outline: "none",
+    color: "#fff",
+    backgroundColor: "transparent",
+    transition: "transform 0.3s ease",
+    borderRadius: "8px",
   },
   main: {
     width: "100%",
@@ -108,40 +128,40 @@ const styles = {
   },
   mainContent: {
     display: "flex",
-    justifyContent: "flex-start", // Cambié para que no distribuya entre los elementos
-    alignItems: "center", // Centra los elementos verticalmente
-    padding: "0 15px", // Espaciado horizontal
+    justifyContent: "flex-start",
+    alignItems: "center",
+    padding: "0 15px",
   },
   imageContainer: {
-    width: "500px", // Fijar ancho del contenedor
-    height: "500px", // Fijar altura del contenedor
-    display: "flex", // Asegura que el contenido esté alineado correctamente
-    justifyContent: "center", // Centra horizontalmente
-    alignItems: "center", // Centra verticalmente
-    overflow: "hidden", 
+    width: "500px",
+    height: "500px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    overflow: "hidden",
     padding: "10px",
-    marginLeft: "175px", // Solo mueve horizontalmente
+    marginLeft: "175px",
   },
   textContainer: {
     display: "flex",
-    flexDirection: "column", // Asegura que el texto esté en columna
-    justifyContent: "center", // Centra verticalmente
-    alignItems: "center", // Centra horizontalmente
-    height: "500px", // Ajusta la altura del contenedor según necesites
-    width: "400px", // Ajusta el ancho del contenedor según necesites
-    position: "relative", // Añadido para mover con left
-    left: "30%", // Mueve solo horizontalmente
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "452px",
+    width: "500px",
+    position: "relative",
+    left: "30%",
+    margin: "10px",
   },
   text: {
-    color: "white", // Texto blanco
-    fontSize: "16px", // Tamaño del texto del párrafo
+    color: "white",
+    fontSize: "22px",
+    width: "500px",
   },
   heading: {
-    color: "white", // Texto blanco
-    fontSize: "64px", // Tamaño del texto para el título
+    color: "white",
+    fontSize: "64px",
     fontWeight: "bold",
-    lineHeight: 0, // Controla el espaciado entre líneas (ajústalo si necesitas)
-
+    lineHeight: 0,
   },
 };
-

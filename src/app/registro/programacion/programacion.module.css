@@ -1,0 +1,28 @@
+/* Programacion.module.css */
+.progressBarContainer {
+    width: 100%;
+    max-width: 300px;
+    height: 50px;
+    background-color: #f1f1f1;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 20px;
+  }
+  
+  .progressBar {
+    height: 100%;
+    background-color: #4caf50; /* Color específico para Programación */
+    transition: width 0.3s ease;
+    border-radius: 4px 0 0 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .progressText {
+    font-size: 18px;
+    color: black;
+    text-align: center;
+    width: 100%;
+  }
+  

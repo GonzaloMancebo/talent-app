@@ -1,0 +1,133 @@
+/* Estilos para el contenedor principal */
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(90deg, #ff5757, #8c52ff);
+  font-family: Arial, sans-serif;
+  transition: transform 0.5s ease, opacity 0.5s ease; /* Transiciones suaves */
+  opacity: 1;
+  transform: translateX(0); /* Posición inicial */
+}
+
+/* Estado de salida (desplaza hacia la derecha) */
+.exit {
+  opacity: 0;
+  transform: translateX(-100%); /* Mueve el contenedor fuera de la vista hacia la derecha */
+}
+
+/* Estado de entrada (aparece desde la izquierda) */
+.enter {
+  opacity: 0;
+  transform: translateX(100%); /* Inicia desde fuera de la vista hacia la izquierda */
+}
+
+.enterActive {
+  opacity: 1;
+  transform: translateX(0); /* Llega a su posición normal */
+}
+
+/* Estilos para el header */
+.header {
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  width: 100%;
+  padding: 10px 20px;
+  margin: 2%;
+}
+
+/* Estilos para el nombre de la empresa */
+.companyName {
+  font-size: 50px;
+  margin-left: 10px;
+  font-weight: bold;
+  color: #fff;
+}
+
+/* Estilos para el subtítulo */
+.h2 {
+  font-size: 25px;
+  color: #fff;
+}
+
+/* Estilos para el main */
+.main {
+  width: 100%;
+}
+
+/* Estilos para la línea */
+.line {
+  width: 100%;
+  border-top: 6px solid #fff;
+  margin-bottom: 3%;
+}
+
+/* Estilos para el contenido principal */
+.mainContent {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column; /* Asegúrate de que el contenido esté en columna */
+  padding: 0 15px;
+  text-align: center; /* Asegura que el texto dentro de mainContent esté centrado */
+}
+
+/* Estilos para el contenedor de los botones */
+.mainButton {
+  display: flex; /* Aplica flexbox a los botones */
+  flex-direction: column; /* Alinea los botones en una columna */
+  align-items: center; /* Centra los botones horizontalmente */
+  width: 100%;
+  gap: 30px;
+  margin: 2% 0;
+}
+
+/* Estilos para los botones */
+.mainButton button {
+  padding: 15px 30px; /* Aumentamos el padding para hacer el botón más grande */
+  font-size: 24px; /* Aumentamos el tamaño del texto */
+  cursor: pointer;
+  border: 2px solid transparent;
+  outline: none;
+  color: black;
+  background-color: #e9cdb3;
+  transition: transform 0.1s ease, background-color 0.3s ease;
+  border-radius: 8px;
+}
+
+.mainButton button:hover {
+  transform: scale(1.05); /* Aumenta ligeramente el tamaño del botón al pasar el cursor */
+  background-color: #d7b49e; /* Cambia ligeramente el color de fondo */
+}
+
+.progressBarContainer {
+  width: 300px; /* Ancho del contenedor principal */
+  height: 50px; /* Altura de la barra */
+  background-color: #e0e0e0; /* Color de fondo de la barra */
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative; /* Permite colocar el texto de manera relativa */
+}
+
+.progressBar {
+  height: 100%; /* Ocupa el 100% de la altura del contenedor */
+  background-color: #4caf50; /* Color de la barra de progreso */
+  transition: width 0.3s ease; /* Transición suave para el progreso */
+  border-radius: 4px 0 0 4px; /* Bordes redondeados en el lado izquierdo */
+  display: flex; /* Usamos flexbox para alinear el texto */
+  justify-content: center; /* Centra el texto horizontalmente */
+  align-items: center; /* Centra el texto verticalmente */
+}
+
+.progressText {
+  color: black; /* Color del texto */
+  font-size: 18px; /* Tamaño del texto */
+  margin: 0; /* Elimina márgenes alrededor del texto */
+  text-align: center; /* Alinea el texto al centro */
+  width: 100%; /* Asegura que ocupe todo el espacio disponible */
+  position: absolute; /* Permite que el texto se coloque encima de la barra */
+  translate : 50% ; 
+}
